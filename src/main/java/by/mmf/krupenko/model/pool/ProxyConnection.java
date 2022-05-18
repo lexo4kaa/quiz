@@ -8,7 +8,8 @@ import java.util.concurrent.Executor;
 /**
  * Class wrapper for Connection (changed method 'close', added method 'reallyClose')
  */
-class ProxyConnection implements Connection {
+class ProxyConnection{// implements Connection {
+    /*
     private Connection connection;
 
     ProxyConnection(Connection connection) {
@@ -53,15 +54,6 @@ class ProxyConnection implements Connection {
     @Override
     public void rollback() throws SQLException {
         connection.rollback();
-    }
-
-    @Override
-    public void close() throws SQLException {
-        CustomConnectionPool.getInstance().releaseConnection(this);
-    }
-
-    void reallyClose() throws SQLException {
-        connection.close();
     }
 
     @Override
@@ -318,4 +310,5 @@ class ProxyConnection implements Connection {
     public boolean isWrapperFor(Class<?> iface) throws SQLException {
         return connection.isWrapperFor(iface);
     }
+     */
 }

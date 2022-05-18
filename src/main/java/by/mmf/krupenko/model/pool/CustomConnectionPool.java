@@ -31,8 +31,8 @@ public class CustomConnectionPool {
         try {
             for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
                 Connection connection = ConnectionCreator.getConnection();
-                ProxyConnection proxyConnection = new ProxyConnection(connection);
-                freeConnections.add(proxyConnection);
+                //ProxyConnection proxyConnection = new ProxyConnection(connection);
+                freeConnections.add(connection);
             }
         } catch (SQLException e) {
             logger.error("creating connection is failed", e);
@@ -103,7 +103,8 @@ public class CustomConnectionPool {
     public void destroyPool() throws ConnectionPoolException {
         for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
             try {
-                ((ProxyConnection)freeConnections.take()).reallyClose();
+                //((ProxyConnection)freeConnections.take()).reallyClose();
+                (freeConnections.take()).close();
             } catch (InterruptedException | SQLException e) {
                 logger.error("error destroy pool", e);
                 throw new ConnectionPoolException("destroyPool error", e);
