@@ -1,0 +1,19 @@
+table {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    text-align: center;
+}
+th {
+    background: dodgerblue;
+    color: white;
+}
+th, td {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: white;
+    padding: 10px 20px;
+}
+td {
+    background: lightblue;
+    padding: 3px;
+}
