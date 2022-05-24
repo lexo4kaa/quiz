@@ -7,10 +7,9 @@
     <title>Quiz</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/quiz.css"/>
 </head>
-<body>
+<body style="width: 40%; text-align: left; margin: 0 auto; background: rgb(230, 230, 230)">
 
-<h2>${ currentQuiz.name }</h2>
-
+<h2 style="text-align: center; margin: 10px">${ currentQuiz.name }</h2>
 
 <form name="createQuiz" method="POST" action="${pageContext.request.contextPath}/controller"
       onsubmit="getAnswers()">
@@ -18,11 +17,11 @@
         <c:set var="question" value="${ quizInfo.key }"/>
         <c:set var="answers" value="${ quizInfo.value }"/>
 
-        <div id="question_${ question.id }">
-            <h3><c:out value="${ question.title }" /></h3>
+        <div id="question_${ question.id }" style="border: black; margin-bottom: 10px; padding: 10px 20px; border-radius: 10px">
+            <div style="font-weight: bold; font-size: 130%; padding: 5px 0;"><c:out value="${ question.title }" /></div>
 
             <c:if test="${ question.questionType.value == 'text' }">
-                <input type="text" name="quizName" value="" placeholder="A short answer">
+                <input autocomplete="off" type="text" name="quizName" value="" placeholder="A short answer">
             </c:if>
 
             <c:if test="${ question.questionType.value == 'one' }">
@@ -47,7 +46,11 @@
 
     <input type="text" hidden id="saveAnswersAgent" name="saveAnswersAgent">
     <input type="hidden" name="command" value="save_answers"/>
-    <input type="submit" value="Send"/>
+    <input type="submit"
+           style="font-size: 16px; padding: 10px 30px;
+           border: 1px solid black; border-radius: 5px;
+           background-color: white; color: black; cursor: pointer;
+" value="Send"/>
 </form>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/getAnswers.js"></script>
 

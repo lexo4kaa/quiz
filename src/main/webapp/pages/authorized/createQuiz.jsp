@@ -11,15 +11,18 @@
 <form name="createQuiz" method="POST" action="${pageContext.request.contextPath}/controller"
        onsubmit="getValues()">
     <input type="hidden" name="command" value="create_quiz"/>
-    <label>Title</label>
-    <br>
-    <input type="text" name="quizName" value="">
-    <br>
-    <input type="text" hidden id="createQuizAgent" name="createQuizAgent">
-    <div id="content"></div>
-    <input type="button" value="Add question to the start" onclick="addQuestionFunc(document.querySelector('#content'))">
-    <br>
-    <input class="form_login" type="submit" value="CREATE"/>
+    <div id="wrapper" style="text-align: center; margin: 0 auto">
+        <div>
+            <label>Title</label>
+            <input type="text" name="quizName" value="">
+        </div>
+        <br>
+        <input type="text" hidden id="createQuizAgent" name="createQuizAgent">
+        <div id="questions">
+            <div id="content"></div>
+        </div>
+        <input class="form_login" type="submit" value="CREATE"/>
+    </div>
 </form>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/rowFunction.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/getValues.js"></script>

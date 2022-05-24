@@ -10,8 +10,8 @@
 
   <style>
     .qr-code {
-      min-width: 100px;
-      max-width: 500px;
+      min-width: 150px;
+      max-width: 540px;
       margin: 10px;
     }
   </style>
@@ -23,14 +23,14 @@
 <div class="container-fluid">
   <div class="text-center">
     <h3>You can copy this QR-code</h3>
-    <img src="https://chart.googleapis.com/chart?cht=qr&chl=${ createdQuizId }&chld=L|0&chs=160x160"
+    <img src="https://chart.googleapis.com/chart?cht=qr&chl=${ createdQuizId }&chld=L|0&chs=450x450"
          class="qr-code img-thumbnail img-responsive" />
     <p>
-      Change size: <input style="width: 50px" type="number" min="100" max="500" step="10" value="160" onchange="changeSize(this)">
+      Change size (min: 150, max: 540) <br/> <input style="width: 50px" type="number" min="150" max="540" step="10" value="450" onchange="changeSize(this)">
     </p>
     <form style="float: right" name="to_quizzes_page" method="POST" action="${pageContext.request.contextPath}/controller">
       <input type="hidden" name="command" value="to_quizzes_page"/>
-      <input type="submit" value="Go to my quizzes"/>
+      <input type="submit" value="Show my quizzes"/>
     </form>
   </div>
 </div>

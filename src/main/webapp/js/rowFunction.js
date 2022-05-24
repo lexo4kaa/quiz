@@ -68,6 +68,7 @@ function switchQuestionType(select) {
     } else {
         input = document.createElement("input");
         input.id = "answer";
+        addMultiAnswerFunc(input);
 
         switch (select.value) {
             case "one":
@@ -116,4 +117,8 @@ function addMultiAnswerFunc(input) {
     div.append(addAnswer);
 
     input.insertAdjacentElement('afterend', div);
+}
+
+window.onload = function () {
+    addQuestionFunc(document.querySelector("#content"));
 }

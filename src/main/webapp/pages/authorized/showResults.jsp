@@ -6,11 +6,10 @@
 <html>
 <head>
     <title>Results</title>
-    <meta http-equiv="refresh" content="7">
-    <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-core.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-pie.min.js"></script>
+    <!-- <meta http-equiv="refresh" content="7"> -->
+    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
 </head>
-<body>
+<body style="background: lightgrey; width: 40%; margin: 0 auto">
 
 <c:if test="${ currentQuizResults.size() == 0 }">
     <h3>There are no answers on this quiz</h3>
@@ -19,21 +18,22 @@
 <c:set var="counter" value="0"/>
 <c:if test="${ currentQuizResults.size() != 0 }">
     <c:forEach var="results" items="${ currentQuizResults }" varStatus="status">
-        <div style="width: 45%; height: 50%; float: left">
+        <div id="wrapper" style="text-align: center; background: white; color: #808080; margin: 10px    ;
+                                font-family: 'Verdana, Helvetica, Arial, sans-serif'">
             <c:set var="question" value="${ results.key }"/>
             <c:set var="answers" value="${ results.value }"/>
 
-            <div id="title">${ question.title }</div>
+            <tspan id="title" style="font-family:Verdana, Helvetica, Arial, sans-serif">${ question.title }</tspan>
             <div id="questionType">${ question.questionType.value }</div>
 
             <c:if test="${ answers.size() == 0 }">
-                <h3>There are no answers on this question</h3>
+                <h6>There are no answers on this question</h6>
             </c:if>
 
             <c:if test="${ answers.size() != 0 }">
                 <c:set var="counter" value="${counter+1}"/>
 
-                <div id="container${counter}" style="width: 100%; height: 75%">
+                <div id="container${counter}" style="padding: 20px 0">
                     <c:forEach var="answer" items="${ answers }" varStatus="status">
                         <div id="value">${answer.key}->${answer.value}</div>
                     </c:forEach>
@@ -47,6 +47,10 @@
 <script>
     anychart.onDocumentReady(function() {
         document.querySelectorAll("[id^='container']").forEach(container => {
+            let typeDiv = container.parentElement.querySelector("#questionType");
+            let type = typeDiv.innerText;
+            typeDiv.remove();
+
             let data = [];
             container.querySelectorAll("#value").forEach(elem => {
                 let values = elem.innerText.split("->");
@@ -54,19 +58,43 @@
                 elem.remove();
             });
 
-            let titleDiv = container.parentElement.querySelector("#title");
-            let title = titleDiv.innerText;
-            titleDiv.remove();
+            if (type !== "text") {
+                container.style.width = "100%";
+                container.style.height = "50%";
+                container.style.margin = "0 auto";
 
-            let typeDiv = container.parentElement.querySelector("#questionType");
-            let type = typeDiv.innerText;
-            typeDiv.remove();
+                let titleDiv = container.parentElement.querySelector("#title");
+                let title = titleDiv.innerText;
+                titleDiv.remove();
 
-            let chart = anychart.pie();
-            chart.title(title + " " + type);
-            chart.data(data);
-            chart.container(container.id);
-            chart.draw();
+                let chart;
+                if (type === "one") {
+                    chart = anychart.pie();
+                    chart.data(data);
+                } else if (type === "multiple") {
+                    chart = anychart.bar();
+                    var series = chart.bar(data);
+                    chart.xAxis().title('Answers');
+                    chart.yAxis().title('Quantity');
+                    chart.yScale().minimum(0);
+                    chart.yScale().ticks().allowFractional(false);
+                    chart.tooltip().titleFormat("Answer: {%x}");
+                    chart.tooltip().format("Quantity: {%value}");
+                } else { // if scale
+
+                }
+                chart.title(title);
+                chart.container(container.id);
+                chart.draw();
+            } else { // if text
+                data.forEach(answer => {
+                    let tspan = document.createElement("tspan");
+                    tspan.innerText = answer.x;
+                    tspan.style.fontFamily = "Verdana, Helvetica, Arial, sans-serif";
+                    tspan.style.color = "black";
+                    container.append(tspan);
+                });
+            }
         });
     });
 </script>

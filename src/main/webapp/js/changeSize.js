@@ -1,8 +1,8 @@
 function changeSize(element) {
-    if (element.value < 100)
-        element.value = 100;
-    else if (element.value > 500)
-        element.value = 500;
+    if (element.value < element.min)
+        element.value = element.min;
+    else if (element.value > element.max)
+        element.value = element.max;
 
     let size = element.value + "x" + element.value;
     let img = document.querySelector("img");
