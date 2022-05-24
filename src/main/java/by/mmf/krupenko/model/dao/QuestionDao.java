@@ -4,6 +4,9 @@ import by.mmf.krupenko.entity.Question;
 
 import java.util.List;
 
+/**
+ * The interface for working with questions
+ */
 public interface QuestionDao {
     /**
      * Create a question.

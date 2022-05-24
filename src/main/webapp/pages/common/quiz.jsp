@@ -17,7 +17,8 @@
         <c:set var="question" value="${ quizInfo.key }"/>
         <c:set var="answers" value="${ quizInfo.value }"/>
 
-        <div id="question_${ question.id }" style="border: black; margin-bottom: 10px; padding: 10px 20px; border-radius: 10px">
+        <div id="question_${ question.id }" style="border: black; border-radius: 10px; background: white;
+                                                    margin-bottom: 10px; padding: 10px 20px">
             <div style="font-weight: bold; font-size: 130%; padding: 5px 0;"><c:out value="${ question.title }" /></div>
 
             <c:if test="${ question.questionType.value == 'text' }">

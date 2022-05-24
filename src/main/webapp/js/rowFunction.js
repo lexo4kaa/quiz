@@ -9,8 +9,9 @@ function addQuestionFunc (input) {
     let answersDiv = document.createElement("div");
     answersDiv.id = "answers";
 
-    let textField = document.createElement("p");
+    let textField = document.createElement("div");
     textField.innerText = "A short answer";
+    textField.style.paddingTop = "6px";
 
     answersDiv.append(textField);
 
@@ -38,7 +39,11 @@ function addQuestionFunc (input) {
         addQuestionFunc(this.parentNode);
     };
 
-    div.style.margin = "10px";
+    div.style.background = "white";
+    div.style.borderRadius = "5px 10px";
+    div.style.padding = "10px";
+    div.style.margin = "5px";
+
     div.append(select);
     div.append(question);
     div.append(removeQuestion);
@@ -63,8 +68,9 @@ function addOption(select, value, text) {
 function switchQuestionType(select) {
     let input;
     if (select.value === "text") {
-        input = document.createElement("p");
+        input = document.createElement("div");
         input.innerText = "A short answer";
+        input.style.paddingTop = "6px";
     } else {
         input = document.createElement("input");
         input.id = "answer";

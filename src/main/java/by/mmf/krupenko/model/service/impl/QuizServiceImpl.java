@@ -76,6 +76,16 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
+    public void removeQuiz(String quizId) throws ServiceException {
+        try {
+            quizDao.removeQuiz(quizId);
+        } catch (DaoException e) {
+            logger.error("remove quiz is failed in QuizServiceImpl", e);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public Map<Question, List<Answer>> findQuizInformation(String quizId) throws ServiceException {
         Map<Question, List<Answer>> map = new HashMap<>();
         try {

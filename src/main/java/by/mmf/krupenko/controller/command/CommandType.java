@@ -12,6 +12,11 @@ public enum CommandType {
             this.command = new CreateQuizCommand();
         }
     },
+    REMOVE_QUIZ {
+        {
+            this.command = new RemoveQuizCommand();
+        }
+    },
     SAVE_ANSWERS {
         {
             this.command = new SaveAnswersCommand();

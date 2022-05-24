@@ -1,11 +1,12 @@
 package by.mmf.krupenko.model.dao;
 
 import by.mmf.krupenko.entity.Quiz;
+import by.mmf.krupenko.model.service.ServiceException;
 
 import java.util.List;
 
 /**
- * The interface for working with users
+ * The interface for working with quizzes
  */
 public interface QuizDao {
     /**
@@ -16,6 +17,14 @@ public interface QuizDao {
      * @throws DaoException if SQLException or ConnectionPoolException occur
      */
     void createQuiz(String quizName, String teacherEmail) throws DaoException;
+
+    /**
+     * Remove quiz by id.
+     *
+     * @param quizId quiz id
+     * @throws DaoException if SQLException or ConnectionPoolException occur
+     */
+    void removeQuiz(String quizId) throws DaoException;
 
     /**
      * Find quizzes by teacherId.

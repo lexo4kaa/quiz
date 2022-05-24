@@ -25,6 +25,7 @@ public class QuizDaoImpl implements QuizDao {
     private static final String SQL_FIND_QUIZ_BY_ID =  "SELECT Id,Name,TeacherEmail,CreationDate,Link " +
                                                     "FROM Quizzes WHERE Id = ?";
     private static final String SQL_CREATE_QUIZ = "INSERT INTO Quizzes (Name, TeacherEmail) VALUES (?,?)";
+    private static final String SQL_REMOVE_QUIZ = "DELETE FROM Quizzes WHERE Id = ?";
 
     private QuizDaoImpl() {
     }
@@ -41,7 +42,18 @@ public class QuizDaoImpl implements QuizDao {
             statement.setString(2, teacherEmail);
             statement.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while create quiz", e);
+            throw new DaoException("Error while creating quiz", e);
+        }
+    }
+
+    @Override
+    public void removeQuiz(String quizId) throws DaoException {
+        try (Connection connection = CustomConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_REMOVE_QUIZ)) {
+            statement.setString(1, quizId);
+            statement.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while removing quiz", e);
         }
     }
 

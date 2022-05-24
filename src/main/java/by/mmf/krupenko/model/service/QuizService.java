@@ -21,6 +21,14 @@ public interface QuizService {
     Quiz findQuizById(String quizId) throws ServiceException;
 
     /**
+     * Remove quiz by id.
+     *
+     * @param quizId quiz id
+     * @throws ServiceException if DaoException occur
+     */
+    void removeQuiz(String quizId) throws ServiceException;
+
+    /**
      * Find quizzes by teacherId.
      *
      * @param teacherEmail teacher email

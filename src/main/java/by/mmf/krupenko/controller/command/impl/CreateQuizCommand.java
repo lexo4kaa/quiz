@@ -34,7 +34,6 @@ public class CreateQuizCommand implements ActionCommand {
         try {
             String quizId = quizService.createQuiz(quizName, teacherEmail, values);
             session.setAttribute(CREATED_QUIZ_ID, QUIZ_PREFIX + quizId);
-            System.out.println(QUIZ_PREFIX + quizId);
             session.setAttribute(QUIZZES, quizService.findQuizzesByTeacherEmail(teacherEmail));
             page = ConfigurationManager.getProperty("path.page.qrCodeGenerator");
         } catch (ServiceException e) {

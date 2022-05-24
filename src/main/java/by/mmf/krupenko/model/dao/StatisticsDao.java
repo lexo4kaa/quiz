@@ -1,8 +1,5 @@
 package by.mmf.krupenko.model.dao;
 
-import by.mmf.krupenko.entity.Quiz;
-
-import java.util.List;
 import java.util.Map;
 
 /**

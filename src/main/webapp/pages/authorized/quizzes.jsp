@@ -36,6 +36,11 @@
                         <input type="submit" value="Show results"/>
                     </form>
 
+                    <form name="remove_quiz_page" method="GET" action="${pageContext.request.contextPath}/controller">
+                        <input type="hidden" name="command" value="remove_quiz"/>
+                        <input type="hidden" name="quizId" value="${ quiz.id }">
+                        <input type="submit" value="Remove the quiz"/>
+                    </form>
                 </td>
             </tr>
         </c:forEach>
