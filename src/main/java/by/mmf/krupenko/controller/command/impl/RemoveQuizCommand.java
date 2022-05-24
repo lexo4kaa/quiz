@@ -32,7 +32,6 @@ public class RemoveQuizCommand implements ActionCommand {
             logger.error("Exception in 'ToQuizPageCommand', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
         }
-
         return new Router(page, Router.RouteType.FORWARD);
     }
 }

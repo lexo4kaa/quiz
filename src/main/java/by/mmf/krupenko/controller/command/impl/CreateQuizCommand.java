@@ -33,7 +33,7 @@ public class CreateQuizCommand implements ActionCommand {
         Map<Question, List<String>> values = QuizParser.parseCreatedQuiz(input);
         try {
             String quizId = quizService.createQuiz(quizName, teacherEmail, values);
-            session.setAttribute(CREATED_QUIZ_ID, QUIZ_PREFIX + quizId);
+            session.setAttribute(SHOWN_QUIZ_ID, QUIZ_PREFIX + quizId);
             session.setAttribute(QUIZZES, quizService.findQuizzesByTeacherEmail(teacherEmail));
             page = ConfigurationManager.getProperty("path.page.qrCodeGenerator");
         } catch (ServiceException e) {

@@ -32,14 +32,14 @@ public enum CommandType {
             this.command = new LoginCommand();
         }
     },
-    TO_LOGIN_PAGE {
-        {
-            this.command = new ToLoginPageCommand();
-        }
-    },
     TO_CREATE_QUIZ_PAGE {
         {
             this.command = new ToCreateQuizPageCommand();
+        }
+    },
+    TO_LOGIN_PAGE {
+        {
+            this.command = new ToLoginPageCommand();
         }
     },
     TO_SHOW_RESULTS_PAGE {
@@ -50,6 +50,11 @@ public enum CommandType {
     TO_STUDENT_PAGE {
         {
             this.command = new ToStudentPageCommand();
+        }
+    },
+    TO_QR_CODE_PAGE {
+        {
+            this.command = new ToQrCodePageCommand();
         }
     },
     TO_QUIZ_PAGE {

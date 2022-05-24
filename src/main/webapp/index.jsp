@@ -16,7 +16,7 @@
         </form>
     </c:if>
     <c:if test="${ currentTeacherEmail != null }">
-        <form style="float: right" name="to_quizzes_page" method="POST" action="${pageContext.request.contextPath}/controller">
+        <form style="float: right" name="to_quizzes_page" method="GET" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="to_quizzes_page"/>
             <input type="submit" value="Show my quizzes"/>
         </form>

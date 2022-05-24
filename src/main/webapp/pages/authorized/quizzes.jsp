@@ -36,10 +36,16 @@
                         <input type="submit" value="Show results"/>
                     </form>
 
-                    <form name="remove_quiz_page" method="GET" action="${pageContext.request.contextPath}/controller">
+                    <form name="remove_quiz_page" method="POST" action="${pageContext.request.contextPath}/controller">
                         <input type="hidden" name="command" value="remove_quiz"/>
                         <input type="hidden" name="quizId" value="${ quiz.id }">
                         <input type="submit" value="Remove the quiz"/>
+                    </form>
+
+                    <form name="to_qr_code_page" method="GET" action="${pageContext.request.contextPath}/controller">
+                        <input type="hidden" name="command" value="to_qr_code_page"/>
+                        <input type="hidden" name="quizId" value="${ quiz.id }">
+                        <input type="submit" value="Show QR-code"/>
                     </form>
                 </td>
             </tr>
@@ -47,7 +53,7 @@
     </table>
 </c:if>
 
-<form name="toCreateQuizPage" method="POST" action="${pageContext.request.contextPath}/controller">
+<form name="toCreateQuizPage" method="GET" action="${pageContext.request.contextPath}/controller">
     <input type="hidden" name="command" value="to_create_quiz_page"/>
     <input type="submit" value="Create new quiz"/>
 </form>
