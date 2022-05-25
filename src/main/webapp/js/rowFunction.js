@@ -39,7 +39,7 @@ function addQuestionFunc (input) {
         addQuestionFunc(this.parentNode);
     };
 
-    div.style.background = "white";
+    div.style.background = "rgb(200,200,250,0.97)";
     div.style.borderRadius = "5px 10px";
     div.style.padding = "10px";
     div.style.margin = "5px";

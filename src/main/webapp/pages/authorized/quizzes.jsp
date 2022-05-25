@@ -14,38 +14,40 @@
 </c:if>
 <c:if test="${ quizzes.size() != 0 }">
     <table style="margin: 0 auto">
-        <tr>
-            <th>Name</th>
-            <th>Creation data</th>
+        <tr style="font-size: large">
+            <th style="width: 235px">Name</th>
+            <th style="width: 165px">Creation data</th>
             <th>Actions</th>
         </tr>
-        <c:forEach var="quiz" items="${quizzes}" varStatus="status">
-            <tr>
+        <c:forEach var="quiz" items="${ quizzes }" varStatus="status">
+            <tr style="font-size: 120%">
                 <td><c:out value="${ quiz.name }" /></td>
                 <td><c:out value="${ quiz.creationDate }" /></td>
                 <td>
-                    <form name="to_quiz_page" method="GET" action="${pageContext.request.contextPath}/controller">
+                    <form style="float:left; margin: 5px" name="to_quiz_page" method="GET" action="${pageContext.request.contextPath}/controller">
                         <input type="hidden" name="command" value="to_quiz_page"/>
                         <input type="hidden" name="quizId" value="${ quiz.id }">
-                        <input type="submit" value="Pass the quiz"/>
+                        <input class="button" type="submit" value="Pass the quiz"/>
                     </form>
 
-                    <form name="to_show_results_page" method="GET" action="${pageContext.request.contextPath}/controller">
-                        <input type="hidden" name="command" value="to_show_results_page"/>
-                        <input type="hidden" name="quizId" value="${ quiz.id }">
-                        <input type="submit" value="Show results"/>
-                    </form>
-
-                    <form name="remove_quiz_page" method="POST" action="${pageContext.request.contextPath}/controller">
+                    <form style="float:right; margin: 5px" name="remove_quiz_page" method="POST" action="${pageContext.request.contextPath}/controller">
                         <input type="hidden" name="command" value="remove_quiz"/>
                         <input type="hidden" name="quizId" value="${ quiz.id }">
-                        <input type="submit" value="Remove the quiz"/>
+                        <input class="button" type="submit" value="Remove the quiz"/>
                     </form>
 
-                    <form name="to_qr_code_page" method="GET" action="${pageContext.request.contextPath}/controller">
+                    <br/>
+
+                    <form style="float:left; margin: 5px" name="to_show_results_page" method="GET" action="${pageContext.request.contextPath}/controller">
+                        <input type="hidden" name="command" value="to_show_results_page"/>
+                        <input type="hidden" name="quizId" value="${ quiz.id }">
+                        <input class="button" type="submit" value="Show results"/>
+                    </form>
+
+                    <form style="float:right; margin: 5px" name="to_qr_code_page" method="GET" action="${pageContext.request.contextPath}/controller">
                         <input type="hidden" name="command" value="to_qr_code_page"/>
                         <input type="hidden" name="quizId" value="${ quiz.id }">
-                        <input type="submit" value="Show QR-code"/>
+                        <input class="button" type="submit" value="Show QR-code"/>
                     </form>
                 </td>
             </tr>
@@ -55,7 +57,7 @@
 
 <form name="toCreateQuizPage" method="GET" action="${pageContext.request.contextPath}/controller">
     <input type="hidden" name="command" value="to_create_quiz_page"/>
-    <input type="submit" value="Create new quiz"/>
+    <input class="button" type="submit" value="Create new quiz"/>
 </form>
 
 </body>
