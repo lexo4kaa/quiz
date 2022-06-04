@@ -2,16 +2,12 @@ package by.mmf.krupenko.controller.command.impl;
 
 import by.mmf.krupenko.controller.command.ActionCommand;
 import by.mmf.krupenko.controller.command.Router;
-import by.mmf.krupenko.entity.Teacher;
 import by.mmf.krupenko.model.service.QuizService;
 import by.mmf.krupenko.model.service.ServiceException;
 import by.mmf.krupenko.model.service.TeacherService;
 import by.mmf.krupenko.model.service.impl.QuizServiceImpl;
 import by.mmf.krupenko.model.service.impl.TeacherServiceImpl;
 import by.mmf.krupenko.resource.ConfigurationManager;
-import by.mmf.krupenko.resource.MessageManager;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -37,11 +33,11 @@ public class LoginCommand implements ActionCommand {
                 session.setAttribute(QUIZZES, quizService.findQuizzesByTeacherEmail(email));
                 page = ConfigurationManager.getProperty("path.page.quizzes");
             } else {
-                session.setAttribute(ERROR_LOGIN_PASS_MESSAGE, MessageManager.getProperty("message.loginerror"));
+                session.setAttribute(ERROR_LOGIN_PASS_MESSAGE, ConfigurationManager.getProperty("message.loginerror"));
                 page = ConfigurationManager.getProperty("path.page.login");
             }
         } catch(ServiceException e) {
-            session.setAttribute(WRONG_ACTION_MESSAGE, MessageManager.getProperty("message.wrongaction"));
+            session.setAttribute(WRONG_ACTION_MESSAGE, ConfigurationManager.getProperty("message.wrongaction"));
             page = ConfigurationManager.getProperty("path.page.index");
         }
         return new Router(page, Router.RouteType.REDIRECT);

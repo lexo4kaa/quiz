@@ -1,4 +1,4 @@
-package by.mmf.krupenko.validator;
+package by.mmf.krupenko.util;
 
 /**
  * The UserValidator is responsible for validation.

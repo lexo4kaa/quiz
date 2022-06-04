@@ -7,7 +7,7 @@ import by.mmf.krupenko.model.dao.impl.TeacherDaoImpl;
 import by.mmf.krupenko.model.service.ServiceException;
 import by.mmf.krupenko.model.service.TeacherService;
 import by.mmf.krupenko.util.PasswordEncryptor;
-import by.mmf.krupenko.validator.UserValidator;
+import by.mmf.krupenko.util.UserValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
