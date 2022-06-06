@@ -21,12 +21,14 @@ public class TeacherDaoImpl implements TeacherDao {
                                                             "FROM Teachers WHERE Email = ?";
 
     private static final String SQL_CREATE_TRIGGER =
-            " CREATE TRIGGER before_teacher_insert\n" +
-                    " BEFORE INSERT ON Teachers\n" +
-                    " FOR EACH ROW\n" +
-                    " BEGIN\n" +
-                    " SET NEW.password = sha1(NEW.password);\n" +
-                    " END;";
+                    "SET GLOBAL log_bin_trust_function_creators = 1; DELIMITER //" +
+                            "CREATE TRIGGER before_teacher_insert" +
+                    " BEFORE INSERT ON Teachers" +
+                    " FOR EACH ROW" +
+                    " BEGIN" +
+                    " SET NEW.password = sha1(NEW.password);" +
+                    " END; // " +
+                            "DELIMITER ;";
 
 
     private TeacherDaoImpl() {
