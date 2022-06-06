@@ -20,17 +20,6 @@ public class TeacherDaoImpl implements TeacherDao {
     private static final String SQL_FIND_TEACHER_BY_EMAIL = "SELECT Email, FirstName, LastName, Password " +
                                                             "FROM Teachers WHERE Email = ?";
 
-    private static final String SQL_CREATE_TRIGGER =
-                    "SET GLOBAL log_bin_trust_function_creators = 1; DELIMITER //" +
-                            "CREATE TRIGGER before_teacher_insert" +
-                    " BEFORE INSERT ON Teachers" +
-                    " FOR EACH ROW" +
-                    " BEGIN" +
-                    " SET NEW.password = sha1(NEW.password);" +
-                    " END; // " +
-                            "DELIMITER ;";
-
-
     private TeacherDaoImpl() {
     }
 
@@ -52,16 +41,6 @@ public class TeacherDaoImpl implements TeacherDao {
             throw new DaoException("Error while finding user", e);
         }
         return teacher;
-    }
-
-    public void sqlCreateTrigger() throws DaoException {
-        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQL_CREATE_TRIGGER)) {
-
-            statement.executeUpdate();
-        } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while create trigger user", e);
-        }
     }
 
     private Teacher createTeacherFromResultSet(ResultSet resultSet) throws SQLException {

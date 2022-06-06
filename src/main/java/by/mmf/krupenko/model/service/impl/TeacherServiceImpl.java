@@ -30,7 +30,6 @@ public class TeacherServiceImpl implements TeacherService {
             try {
                 Teacher teacher = teacherDao.findTeacherByEmail(email).orElseThrow(DaoException::new);
                 findPassword = teacher.getPassword();
-                teacherDao.sqlCreateTrigger();
             } catch (DaoException e) {
                 logger.error("teacherDao.findTeacherByEmail(" + email + ") is failed in TeacherServiceImpl", e);
                 throw new ServiceException(e);

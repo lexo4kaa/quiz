@@ -16,6 +16,4 @@ public interface TeacherDao {
      * @throws DaoException if SQLException or ConnectionPoolException occur
      */
     Optional<Teacher> findTeacherByEmail(String email) throws DaoException;
-
-    void sqlCreateTrigger() throws DaoException;
 }
