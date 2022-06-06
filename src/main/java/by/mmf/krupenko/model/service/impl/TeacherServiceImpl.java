@@ -6,7 +6,8 @@ import by.mmf.krupenko.model.dao.TeacherDao;
 import by.mmf.krupenko.model.dao.impl.TeacherDaoImpl;
 import by.mmf.krupenko.model.service.ServiceException;
 import by.mmf.krupenko.model.service.TeacherService;
-import by.mmf.krupenko.util.PasswordEncryptor;
+import by.mmf.krupenko.resource.EncryptorAlgorithm;
+import by.mmf.krupenko.util.Encryptor;
 import by.mmf.krupenko.util.UserValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,9 +24,8 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public boolean authorizeTeacher(String email, String password) throws ServiceException {
-        PasswordEncryptor encryptor = new PasswordEncryptor();
         String findPassword = "";
-        String encPassword = encryptor.encryptPassword(password);
+        String encPassword = Encryptor.encrypt(password, EncryptorAlgorithm.PASSWORD);
         if (UserValidator.isEmailCorrect(email) && UserValidator.isPasswordCorrect(password)) {
             try {
                 Teacher teacher = teacherDao.findTeacherByEmail(email).orElseThrow(DaoException::new);

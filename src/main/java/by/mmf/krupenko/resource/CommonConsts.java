@@ -5,5 +5,5 @@ public class CommonConsts {
     public final static String SEMICOLON_STRING = ";";
     public final static String EMPTY_STRING = "";
 
-    public final static String QUIZ_PREFIX = "http://localhost:8080/diplom/controller?command=to_quiz_page%26quizId=";
+    public final static String QUIZ_PREFIX = "mmf-bsu-quiz.herokuapp.com/diplom/controller?command=to_quiz_page%26quizId=";
 }

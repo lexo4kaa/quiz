@@ -5,14 +5,16 @@ import by.mmf.krupenko.model.dao.DaoException;
 import by.mmf.krupenko.model.dao.QuizDao;
 import by.mmf.krupenko.model.pool.ConnectionPoolException;
 import by.mmf.krupenko.model.pool.CustomConnectionPool;
+import by.mmf.krupenko.resource.CommonConsts;
+import by.mmf.krupenko.resource.EncryptorAlgorithm;
+import by.mmf.krupenko.util.Encryptor;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static by.mmf.krupenko.model.dao.column.QuizColumn.*;
 
@@ -24,7 +26,8 @@ public class QuizDaoImpl implements QuizDao {
                                                     "FROM Quizzes WHERE Name = ? AND TeacherEmail = ?";
     private static final String SQL_FIND_QUIZ_BY_ID =  "SELECT Id,Name,TeacherEmail,CreationDate,Link " +
                                                     "FROM Quizzes WHERE Id = ?";
-    private static final String SQL_CREATE_QUIZ = "INSERT INTO Quizzes (Name, TeacherEmail) VALUES (?,?)";
+    private static final String SQL_CREATE_QUIZ = "INSERT INTO Quizzes (Id,Name,TeacherEmail,CreationDate,Link) " +
+                                                  "VALUES (?,?,?,?,?)";
     private static final String SQL_REMOVE_QUIZ = "DELETE FROM Quizzes WHERE Id = ?";
 
     private QuizDaoImpl() {
@@ -38,8 +41,13 @@ public class QuizDaoImpl implements QuizDao {
     public void createQuiz(String quizName, String teacherEmail) throws DaoException {
         try (Connection connection = CustomConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_CREATE_QUIZ)) {
-            statement.setString(1, quizName);
-            statement.setString(2, teacherEmail);
+            Random rand = new Random();
+            String id = Encryptor.encrypt(String.valueOf(rand.nextFloat()), EncryptorAlgorithm.ID);
+            statement.setString(1, id);
+            statement.setString(2, quizName);
+            statement.setString(3, teacherEmail);
+            statement.setDate(4, Date.valueOf(LocalDate.now()));
+            statement.setString(5, CommonConsts.QUIZ_PREFIX + id);
             statement.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Error while creating quiz", e);
