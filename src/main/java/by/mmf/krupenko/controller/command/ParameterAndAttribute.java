@@ -24,7 +24,6 @@ public final class ParameterAndAttribute {
 
     // messages
     public static final String ERROR_LOGIN_PASS_MESSAGE = "errorLoginPassMessage";
-    public static final String LOGIN_EXISTS_MESSAGE = "loginExistsMessage";
     public static final String WRONG_ACTION_MESSAGE = "wrongAction";
 
     private ParameterAndAttribute() {}

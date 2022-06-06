@@ -5,7 +5,6 @@
 <html>
 <head>
     <title>Quiz</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/quiz.css"/>
 </head>
 <body style="width: 40%; text-align: left; margin: 0 auto; background: url('${pageContext.request.contextPath}/images/math-background.jpg')">
 
@@ -50,11 +49,10 @@
 
     <input type="text" hidden id="saveAnswersAgent" name="saveAnswersAgent">
     <input type="hidden" name="command" value="save_answers"/>
-    <input type="submit"
-           style="font-size: 16px; padding: 10px 30px;
-           border: 1px solid black; border-radius: 5px;
-           background-color: rgb(200,200,250,0.97); cursor: pointer;
-" value="Send"/>
+    <input style="font-size: 16px; width: 150px; padding: 5px; margin: 10px auto;
+                border: 1px solid black; border-radius: 5px;
+                background-color: white; color: black; cursor: pointer;"
+           type="submit" value="Send"/>
 </form>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/getAnswers.js"></script>
 

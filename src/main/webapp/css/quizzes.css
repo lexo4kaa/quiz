@@ -4,8 +4,7 @@ table {
     text-align: center;
 }
 th {
-    background: dodgerblue;
-    color: white;
+    background: rgb(200,200,255);
 }
 th, td {
     border-style: solid;
@@ -14,12 +13,12 @@ th, td {
     padding: 10px 20px;
 }
 td {
-    background: lightblue;
+    background: rgb(200,200,250,0.97);
     padding: 3px;
 }
 .button {
-    font-size: 15px;
-    width: 140px;
+    font-size: 16px;
+    width: 150px;
     padding: 5px;
     border: 1px solid black;
     border-radius: 5px;

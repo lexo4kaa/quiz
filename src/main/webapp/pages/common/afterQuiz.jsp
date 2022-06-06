@@ -9,7 +9,7 @@
 <body>
 <div class="form_auth_block">
     <div class="form_auth_block_content">
-        <h3>Answers saved</h3>
+        <h3>Thank you! Answers saved.</h3>
     </div>
 </div>
 

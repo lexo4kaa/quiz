@@ -6,43 +6,52 @@
 <html>
 <head>
     <title>Results</title>
-    <!-- <meta http-equiv="refresh" content="7"> -->
+    <meta http-equiv="refresh" content="5">
     <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
 </head>
-<body style="background: lightgrey; width: 40%; margin: 0 auto">
+<body style="background: url('${pageContext.request.contextPath}/images/math-background.jpg')">
+<div style="width: 50%; margin: 0 auto">
 
-<c:if test="${ currentQuizResults.size() == 0 }">
-    <h3>There are no answers on this quiz</h3>
-</c:if>
+    <c:if test="${ currentQuizResults.size() == 0 }">
+        <h3>There are no answers on this quiz</h3>
+    </c:if>
 
-<c:set var="counter" value="0"/>
-<c:if test="${ currentQuizResults.size() != 0 }">
-    <c:forEach var="results" items="${ currentQuizResults }" varStatus="status">
-        <div id="wrapper" style="text-align: center; background: white; color: #808080; margin: 10px    ;
-                                font-family: 'Verdana, Helvetica, Arial, sans-serif'">
-            <c:set var="question" value="${ results.key }"/>
-            <c:set var="answers" value="${ results.value }"/>
+    <c:if test="${ currentQuizResults.size() != 0 }">
+        <c:set var="counter" value="0"/>
+        <c:forEach var="results" items="${ currentQuizResults }" varStatus="status">
+            <div id="wrapper" style="text-align: center; background: white; color: #808080;
+                                    font-family: 'Verdana, Helvetica, Arial, sans-serif'">
+                <c:set var="question" value="${ results.key }"/>
+                <c:set var="answers" value="${ results.value }"/>
 
-            <tspan id="title" style="font-family:Verdana, Helvetica, Arial, sans-serif">${ question.title }</tspan>
-            <div id="questionType">${ question.questionType.value }</div>
+                <tspan id="title" style="font-family:Verdana, Helvetica, Arial, sans-serif">${ question.title }</tspan>
+                <div id="questionType">${ question.questionType.value }</div>
 
-            <c:if test="${ answers.size() == 0 }">
-                <h6>There are no answers on this question</h6>
-            </c:if>
+                <c:if test="${ answers.size() == 0 }">
+                    <h6>There are no answers on this question</h6>
+                </c:if>
 
-            <c:if test="${ answers.size() != 0 }">
-                <c:set var="counter" value="${counter+1}"/>
+                <c:if test="${ answers.size() != 0 }">
+                    <c:set var="counter" value="${counter+1}"/>
 
-                <div id="container${counter}" style="padding: 20px 0">
-                    <c:forEach var="answer" items="${ answers }" varStatus="status">
-                        <div id="value">${answer.key}->${answer.value}</div>
-                    </c:forEach>
-                </div>
+                    <div id="container${counter}" style="padding: 20px 0">
+                        <c:forEach var="answer" items="${ answers }" varStatus="status">
+                            <div id="value">${answer.key}->${answer.value}</div>
+                        </c:forEach>
+                    </div>
 
-            </c:if>
-        </div>
-    </c:forEach>
-</c:if>
+                </c:if>
+            </div>
+        </c:forEach>
+    </c:if>
+    <form style="text-align: center" name="to_quizzes_page" method="GET" action="${pageContext.request.contextPath}/controller">
+        <input type="hidden" name="command" value="to_quizzes_page"/>
+        <input style="font-size: 16px; width: 150px; padding: 5px; margin: 10px auto;
+                border: 1px solid black; border-radius: 5px;
+                background-color: white; color: black; cursor: pointer;"
+               type="submit" value="Show my quizzes"/>
+    </form>
+</div>
 
 <script>
     anychart.onDocumentReady(function() {
@@ -88,11 +97,13 @@
                 chart.draw();
             } else { // if text
                 data.forEach(answer => {
-                    let tspan = document.createElement("tspan");
-                    tspan.innerText = answer.x;
-                    tspan.style.fontFamily = "Verdana, Helvetica, Arial, sans-serif";
-                    tspan.style.color = "black";
-                    container.append(tspan);
+                    let p = document.createElement("p");
+                    p.style.width = "fit-content";
+                    p.style.margin = "10px auto";
+                    p.innerText = answer.x;
+                    p.style.fontFamily = "Verdana, Helvetica, Arial, sans-serif";
+                    p.style.color = "black";
+                    container.append(p);
                 });
             }
         });

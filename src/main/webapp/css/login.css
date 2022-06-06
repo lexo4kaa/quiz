@@ -4,27 +4,26 @@ body {
 
 .form_auth_block{
     width: 500px;
-    height: 500px;
+    height: 400px;
     margin: 0 auto;
+    background: rgb(200,200,250,0.97);
+    border-radius: 20px;
+    border: 3px solid black;
 }
+
 .form_auth_block_content{
     padding-top: 5%;
 }
-.form_auth_block_head_text{
-    display: block;
-    text-align: center;
-    font-size: 250%;
-    color: blue;
-}
+
 .form_auth_block label{
     display: block;
     text-align: center;
     padding: 10px;
-    font-size: 150%;
-    color: blue;
+    font-size: 200%;
     margin-bottom: 10px;
     margin-top: 10px;
 }
+
 .form_auth_block input{
     display: block;
     margin: 0 auto;
@@ -36,32 +35,8 @@ body {
 }
 .form_auth_block .form_login{
     font-size: 120%;
-    float: left;
-    background-color: blue;
-    color: lightgray;
-    height: 40px;
-    width: 140px;
-    margin: 20px 0 0 50px;
-    border: none;
+    height: 45px;
+    width: 150px;
+    margin: 0 auto;
     cursor: pointer;
-}
-
-.form_auth_block .form_no_account{
-    font-size: 80%;
-    float: right;
-    color: blue;
-    background-color: lightgray;
-    height: 40px;
-    width: 140px;
-    margin-right: 50px;
-    margin-top: -15px;
-    border: none;
-    cursor: pointer;
-}
-
-a {
-    display: block;
-    text-align: center;
-    color: blue;
-    text-decoration: none;
 }

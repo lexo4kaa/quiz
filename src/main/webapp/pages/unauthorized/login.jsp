@@ -7,33 +7,23 @@
     <title>Login</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css"/>
 </head>
-<body>
+<body style="background: url('${pageContext.request.contextPath}/images/math-background.jpg')">
 <div class="form_auth_block">
     <div class="form_auth_block_content">
-        <br>
         <form name="loginForm" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="login"/>
             <label>Email</label>
-            <input type="email" name="email" value="" title="Email prompt">
+            <input type="email" name="email" value="">
             <label>Password</label>
-            <input type="password" name="password" value="" pattern="^[\w]{6,18}$" title="Password prompt">
+            <input type="password" name="password" value="" pattern="^[\w]{6,18}$">
             <br>
             <div style="text-align: center; color: red">
                 ${errorLoginPassMessage}
                 ${wrongAction}
-                ${nullPage}
-                ${banMessage}
             </div>
             <br>
             <input class="form_login" type="submit" value="LOG IN"/>
-            <br>
         </form>
-        <!--
-        <form name="toRegistration" method="POST" action="${pageContext.request.contextPath}/controller">
-            <input type="hidden" name="command" value="to_registration_page"/>
-            <input class="form_no_account" type="submit" value="I haven't got an account"/>
-        </form>
-        -->
     </div>
 </div>
 

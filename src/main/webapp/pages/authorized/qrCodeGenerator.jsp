@@ -28,9 +28,12 @@
     <p>
       Change size (min: 150, max: 540) <br/> <input style="width: 50px" type="number" min="150" max="540" step="10" value="450" onchange="changeSize(this)">
     </p>
-    <form style="float: right" name="to_quizzes_page" method="GET" action="${pageContext.request.contextPath}/controller">
+    <form style="margin: 0 auto" name="to_quizzes_page" method="GET" action="${pageContext.request.contextPath}/controller">
       <input type="hidden" name="command" value="to_quizzes_page"/>
-      <input type="submit" value="Show my quizzes"/>
+      <input style="font-size: 16px; width: 150px; padding: 5px;
+                    border: 1px solid black; border-radius: 5px;
+                    background-color: white; color: black; cursor: pointer;"
+             type="submit" value="Show my quizzes"/>
     </form>
   </div>
 </div>
