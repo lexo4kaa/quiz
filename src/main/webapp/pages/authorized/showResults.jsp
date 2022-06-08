@@ -9,7 +9,7 @@
     <meta http-equiv="refresh" content="5">
     <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
 </head>
-<body style="background: url('${pageContext.request.contextPath}/images/math-background.jpg')">
+<body style="background-color: rgb(200,200,250,0.25)">
 <div style="width: 50%; margin: 0 auto">
 
     <c:if test="${ currentQuizResults.size() == 0 }">
@@ -89,8 +89,6 @@
                     chart.yScale().ticks().allowFractional(false);
                     chart.tooltip().titleFormat("Answer: {%x}");
                     chart.tooltip().format("Quantity: {%value}");
-                } else { // if scale
-
                 }
                 chart.title(title);
                 chart.container(container.id);

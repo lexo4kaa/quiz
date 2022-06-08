@@ -13,6 +13,8 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +30,8 @@ public class CreateQuizCommand implements ActionCommand {
         String page;
         HttpSession session = request.getSession();
         String teacherEmail = (String) session.getAttribute(CURRENT_TEACHER_EMAIL);
-        String quizName = request.getParameter(QUIZ_NAME);
-        String input = request.getParameter(CREATE_QUIZ_AGENT);
+        String quizName = new String(request.getParameter(QUIZ_NAME).getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+        String input = new String(request.getParameter(CREATE_QUIZ_AGENT).getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
         Map<Question, List<String>> values = QuizParser.parseCreatedQuiz(input);
         try {
             String quizId = quizService.createQuiz(quizName, teacherEmail, values);

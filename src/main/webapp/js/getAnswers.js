@@ -10,8 +10,8 @@ function getAnswers() {
             answers = question.querySelectorAll('input[type="checkbox"]:checked');
         } else if (question.querySelectorAll('input[type="radio"]').length !== 0) {
             answers = question.querySelectorAll('input[type="radio"]:checked');
-        } else if (question.querySelectorAll('input[type="text"]').length !== 0) {
-            answers = question.querySelectorAll('input[type="text"]');
+        } else if (question.querySelectorAll('textarea').length !== 0) {
+            answers = question.querySelectorAll('textarea');
         }
 
         let answersArray = [];

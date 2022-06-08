@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setBundle basename="pagecontent"/>
@@ -6,7 +6,7 @@
 <head>
     <title>Create quiz</title>
 </head>
-<body style="margin: 0 auto; width: 40%; text-align: left; background: url('${pageContext.request.contextPath}/images/math-background.jpg')">
+<body style="margin: 0 auto; width: 40%; text-align: left; background-color: rgb(200,200,250,0.25)">
 <form name="createQuiz" method="POST" action="${pageContext.request.contextPath}/controller"
        onsubmit="getValues()">
     <input type="hidden" name="command" value="create_quiz"/>

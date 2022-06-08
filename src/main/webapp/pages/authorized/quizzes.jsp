@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setBundle basename="pagecontent"/>
@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/quizzes.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body style="text-align:center; background: url('${pageContext.request.contextPath}/images/math-background.jpg')">
+<body style="text-align:center; background-color: rgb(200,200,250,0.25)">
 <c:if test="${ quizzes.size() == 0 }">
-    <h3 style="width: 500px; background: rgba(200, 200, 250, 0.97); margin: 10px auto">There is no quizzes by your parameters</h3>
+    <h3 style="width: 500px; margin: 10px auto">There is no quizzes by your parameters</h3>
 </c:if>
 <c:if test="${ quizzes.size() != 0 }">
-    <h3 style="width: 250px; background: rgba(200, 200, 250, 0.97); margin: 10px auto">Created quizzes</h3>
+    <h3 style="width: 250px; margin: 10px auto">Created quizzes</h3>
     <table style="margin: 0 auto">
         <tr style="font-size: large">
             <th style="width: 235px">Name</th>

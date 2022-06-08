@@ -2,16 +2,22 @@ function addQuestionFunc (input) {
     let div = document.createElement("div");
     div.id = "question";
 
-    let question = document.createElement("input");
-    question.type = "text";
+    let question = document.createElement("textarea");
     question.id = "title";
+    question.maxLength = "200";
+    question.rows = "3";
+    question.style.width = "100%";
+    question.style.marginTop = "10px";
+    question.style.marginBottom = "10px";
+    question.style.fontSize = "large";
+    question.placeholder = "Enter your question here";
 
     let answersDiv = document.createElement("div");
     answersDiv.id = "answers";
 
     let textField = document.createElement("div");
     textField.innerText = "A short answer";
-    textField.style.paddingTop = "6px";
+    textField.style.paddingTop = "5px";
 
     answersDiv.append(textField);
 
@@ -19,7 +25,6 @@ function addQuestionFunc (input) {
     addOption(select, "text", "Text");
     addOption(select, "one", "Single");
     addOption(select, "multiple", "Multiple");
-    addOption(select, "scale", "Scale");
 
     select.onchange = function () {
         switchQuestionType(select);
@@ -70,7 +75,7 @@ function switchQuestionType(select) {
     if (select.value === "text") {
         input = document.createElement("div");
         input.innerText = "A short answer";
-        input.style.paddingTop = "6px";
+        input.style.paddingTop = "5px";
     } else {
         input = document.createElement("input");
         input.id = "answer";
@@ -86,9 +91,6 @@ function switchQuestionType(select) {
                     addMultiAnswerFunc(this);
                 };
                 break;
-            case "scale":
-                alert("+");
-                break;
         }
     }
 
@@ -99,10 +101,18 @@ function switchQuestionType(select) {
 
 function addMultiAnswerFunc(input) {
     let div = document.createElement("div");
+    div.style.display = "flex";
+    div.style.alignItems = "center";
 
-    let answer = document.createElement("input");
-    answer.type = "text";
+    let answer = document.createElement("textarea");
     answer.id = "answer";
+    answer.maxLength = "200";
+    answer.rows = "3";
+    answer.style.width = "100%";
+    answer.style.marginTop = "10px";
+    answer.style.marginBottom = "10px";
+    answer.style.fontSize = "large";
+    answer.placeholder = "Enter answer";
 
     let removeAnswer = document.createElement("input");
     removeAnswer.type = "button";
@@ -110,6 +120,9 @@ function addMultiAnswerFunc(input) {
     removeAnswer.onclick = function () {
         this.parentNode.remove();
     };
+    removeAnswer.style.height = "25px";
+    removeAnswer.style.widht = "25px";
+    removeAnswer.style.marginLeft = "2%";
 
     let addAnswer = document.createElement("input");
     addAnswer.type = "button";
@@ -117,6 +130,9 @@ function addMultiAnswerFunc(input) {
     addAnswer.onclick = function () {
         addMultiAnswerFunc(addAnswer.parentNode);
     };
+    addAnswer.style.height = "25px";
+    addAnswer.style.widht = "25px";
+    addAnswer.style.marginLeft = "2%";
 
     div.append(answer);
     div.append(removeAnswer);

@@ -6,8 +6,7 @@ import java.util.Optional;
 public enum QuestionType {
     TEXT("text"),
     ONE("one"),
-    MULTIPLE("multiple"),
-    SCALE("scale");
+    MULTIPLE("multiple");
 
     private final String value;
 

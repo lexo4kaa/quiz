@@ -15,11 +15,11 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
-import static by.mmf.krupenko.controller.command.ParameterAndAttribute.QUIZZES;
-import static by.mmf.krupenko.controller.command.ParameterAndAttribute.SAVE_ANSWERS_AGENT;
+import static by.mmf.krupenko.controller.command.ParameterAndAttribute.*;
 
 public class SaveAnswersCommand implements ActionCommand {
     private static final StatisticsService statisticsService = new StatisticsServiceImpl();
@@ -28,9 +28,9 @@ public class SaveAnswersCommand implements ActionCommand {
     @Override
     public Router execute(HttpServletRequest request) {
         String page;
-        String input = request.getParameter(SAVE_ANSWERS_AGENT);
-        Map<Integer, List<String>> answers = QuizParser.parseAnswers(input);
+        String input = new String(request.getParameter(SAVE_ANSWERS_AGENT).getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
 
+        Map<Integer, List<String>> answers = QuizParser.parseAnswers(input);
         try {
             statisticsService.save(answers);
             page = ConfigurationManager.getProperty("path.page.after_quiz");

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setBundle basename="pagecontent"/>
@@ -6,13 +6,13 @@
 <head>
     <title>Quiz</title>
 </head>
-<body style="width: 40%; text-align: left; margin: 0 auto; background: url('${pageContext.request.contextPath}/images/math-background.jpg')">
+<body style="width: 40%; text-align: left; margin: 0 auto; background-color: rgb(200,200,250,0.25)">
 
 <form name="createQuiz" method="POST" action="${pageContext.request.contextPath}/controller"
       onsubmit="getAnswers()">
 
     <div style="">
-        <h2 style="text-align: center; margin: 10px auto; width: 300px; border-radius: 10px; background: rgb(200,200,250,0.97)">${ currentQuiz.name }</h2>
+        <h2 style="text-align: center; margin: 10px auto; width: 300px; border-radius: 10px;">${ currentQuiz.name }</h2>
 
         <c:forEach var="quizInfo" items="${currentQuizInfo}" varStatus="status">
             <c:set var="question" value="${ quizInfo.key }"/>
@@ -23,7 +23,9 @@
                 <div style="font-weight: bold; font-size: 130%; padding: 5px 0;"><c:out value="${ question.title }" /></div>
 
                 <c:if test="${ question.questionType.value == 'text' }">
-                    <input autocomplete="off" type="text" name="quizName" value="" placeholder="A short answer">
+                    <textarea autocomplete="off" name="quizName" placeholder="A short answer"
+                              maxlength="200" rows="3"
+                              style="width:100%;margin:10px 0;font-size:large"></textarea>
                 </c:if>
 
                 <c:if test="${ question.questionType.value == 'one' }">
@@ -38,10 +40,6 @@
                         <input type="checkbox" id="answer_${ answer.id }" name="question_${ question.id }" value="${ answer.answer }">
                         <label for="answer_${ answer.id }">${ answer.answer }</label><br>
                     </c:forEach>
-                </c:if>
-
-                <c:if test="${ question.questionType.value == 'scale' }">
-                    <h3>SCALE</h3>
                 </c:if>
             </div>
         </c:forEach>

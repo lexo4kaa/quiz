@@ -22,13 +22,17 @@ public class QuizParser {
     public static Map<Question, List<String>> parseCreatedQuiz(String input) {
         String[] questions = getArrayFromString(input);
         Map<Question, List<String>> map = new HashMap<>();
-        Pattern pattern = Pattern.compile("\"\\{type:([\\w]+),title:([\\w\\p{Punct} ]*)}\":\\[([\\w\\p{Punct} ]*)]");
+        Pattern pattern = Pattern.compile("\"\\{type:([\\w]+),title:([\\w\\p{Punct} А-ЯЁа-яё]*)}\":\\[([\\w\\p{Punct} А-ЯЁа-яё]*)]");
         for (String questionString : questions) {
-            Matcher matcher = pattern.matcher(questionString);
-            matcher.matches();
-            Question question = new Question(matcher.group(2), QuestionType.getQuestionType(matcher.group(1)).get());
-            List<String> valuesList = createAnswers(matcher.group(3));
-            map.put(question, valuesList);
+            try {
+                Matcher matcher = pattern.matcher(questionString);
+                matcher.matches();
+                Question question = new Question(matcher.group(2), QuestionType.getQuestionType(matcher.group(1)).get());
+                List<String> valuesList = createAnswers(matcher.group(3));
+                map.put(question, valuesList);
+            } catch (Exception e) {
+                logger.error("Exception with patterns", e);
+            }
         }
         return map;
     }
@@ -54,7 +58,7 @@ public class QuizParser {
     public static Map<Integer, List<String>> parseAnswers(String input) {
         String[] answers = getArrayFromString(input);
         Map<Integer, List<String>> map = new HashMap<>();
-        Pattern pattern = Pattern.compile("\"([0-9]+)\":\\[([\\w\\p{Punct} ]*)]");
+        Pattern pattern = Pattern.compile("\"([0-9]+)\":\\[([\\w\\p{Punct} А-ЯЁа-яё]*)]");
         for (String answerString : answers) {
             Matcher matcher = pattern.matcher(answerString);
             matcher.matches();
