@@ -35,6 +35,10 @@ public class TeacherServiceImpl implements TeacherService {
                 throw new ServiceException(e);
             }
         }
+
+        while (encPassword.length() < 40)
+            encPassword = "0" + encPassword;
+
         return findPassword.equals(encPassword);
     }
 
