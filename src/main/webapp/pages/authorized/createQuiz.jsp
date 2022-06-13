@@ -13,10 +13,11 @@
     <div id="wrapper" style="text-align: center">
         <div style="background: rgb(200,200,250,0.97); margin: 5px auto; padding: 3px; border-radius: 10px; width: 50%">
             <div style="font-size: 150%">Title</div>
-            <input style="width: 100%" type="text" name="quizName" value="">
+            <textarea name="quizName" maxlength="200" rows="3"
+                      style="width:100%;margin:10px 0;font-size:large" required></textarea>
         </div>
         <br>
-        <input type="text" hidden id="createQuizAgent" name="createQuizAgent">
+        <input type="text" hidden id="createQuizAgent" name="createQuizAgent"/>
         <div id="questions">
             <div id="content"></div>
         </div>

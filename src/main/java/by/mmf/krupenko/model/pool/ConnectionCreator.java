@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.Properties;
 
 /**
@@ -18,13 +19,9 @@ class ConnectionCreator {
     private static final Logger logger = LogManager.getLogger();
     private static final Properties properties = new Properties();
     private static final String FILE_NAME = "properties/database.properties";
-    private static final String PROPERTY_URL = "db.url";
-    private static final String PROPERTY_PASSWORD = "db.password";
-    private static final String PROPERTY_USER = "db.user";
-    private static final String PROPERTY_DRIVER = "db.driver";
+    private static final String PROPERTY_URL = "url";
+    private static final String PROPERTY_DRIVER = "driver";
     private static final String DATABASE_URL;
-    private static final String DATABASE_PASSWORD;
-    private static final String DATABASE_USER;
     private static final String DATABASE_DRIVER;
 
     private ConnectionCreator(){}
@@ -35,9 +32,9 @@ class ConnectionCreator {
             InputStream inputStream = classLoader.getResourceAsStream(FILE_NAME);
             properties.load(inputStream);
             DATABASE_URL = properties.getProperty(PROPERTY_URL);
-            DATABASE_PASSWORD = properties.getProperty(PROPERTY_PASSWORD);
-            DATABASE_USER = properties.getProperty(PROPERTY_USER);
+            properties.remove(PROPERTY_URL);
             DATABASE_DRIVER = properties.getProperty(PROPERTY_DRIVER);
+            properties.remove(PROPERTY_DRIVER);
             Class.forName(DATABASE_DRIVER);
         } catch (FileNotFoundException e) {
             logger.fatal("FileNotFoundException in ConnectionCreator", e);
@@ -58,6 +55,6 @@ class ConnectionCreator {
      * @throws SQLException sql exception
      */
     static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
+        return DriverManager.getConnection(DATABASE_URL, properties);
     }
 }

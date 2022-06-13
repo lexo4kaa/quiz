@@ -11,6 +11,7 @@ function addQuestionFunc (input) {
     question.style.marginBottom = "10px";
     question.style.fontSize = "large";
     question.placeholder = "Enter your question here";
+    question.required = true;
 
     let answersDiv = document.createElement("div");
     answersDiv.id = "answers";
@@ -113,6 +114,7 @@ function addMultiAnswerFunc(input) {
     answer.style.marginBottom = "10px";
     answer.style.fontSize = "large";
     answer.placeholder = "Enter answer";
+    answer.required = true;
 
     let removeAnswer = document.createElement("input");
     removeAnswer.type = "button";

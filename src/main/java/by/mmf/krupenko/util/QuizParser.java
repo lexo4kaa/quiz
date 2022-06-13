@@ -39,14 +39,14 @@ public class QuizParser {
 
     private static String[] getArrayFromString(String input) {
         input = input.substring(1, input.length() - 1).replaceAll("\\\\\"", "");
-        input = input.replaceAll("],\"", "];\"");
-        return input.split(SEMICOLON_STRING);
+        input = input.replaceAll("],\"", "];;;;\"");
+        return input.split(";;;;");
     }
 
     private static List<String> createAnswers(String answersString) {
         List<String> answers = new ArrayList<>();
         if (!answersString.isEmpty()) {
-            answers = Arrays.stream(answersString.split(COMMA_STRING)).collect(Collectors.toList());
+            answers = Arrays.stream(answersString.split(COMMA_STRING + "\"")).collect(Collectors.toList());
             for (int i = 0; i < answers.size(); i++) {
                 String current = answers.get(i);
                 answers.set(i, current.substring(1, current.length() - 1));
@@ -58,7 +58,7 @@ public class QuizParser {
     public static Map<Integer, List<String>> parseAnswers(String input) {
         String[] answers = getArrayFromString(input);
         Map<Integer, List<String>> map = new HashMap<>();
-        Pattern pattern = Pattern.compile("\"([0-9]+)\":\\[([\\w\\p{Punct} А-ЯЁа-яё]*)]");
+        Pattern pattern = Pattern.compile("\"([0-9]+)\":\\[([\\w\\p{Punct} А-ЯЁа-яё\n]*)]");
         for (String answerString : answers) {
             Matcher matcher = pattern.matcher(answerString);
             matcher.matches();

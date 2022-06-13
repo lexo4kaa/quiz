@@ -39,7 +39,6 @@
                             <div id="value">${answer.key}->${answer.value}</div>
                         </c:forEach>
                     </div>
-
                 </c:if>
             </div>
         </c:forEach>
@@ -101,6 +100,7 @@
                     p.innerText = answer.x;
                     p.style.fontFamily = "Verdana, Helvetica, Arial, sans-serif";
                     p.style.color = "black";
+                    p.style.background = "lightBlue"
                     container.append(p);
                 });
             }

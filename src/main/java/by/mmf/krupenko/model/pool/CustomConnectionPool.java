@@ -38,7 +38,7 @@ public class CustomConnectionPool {
             logger.error("creating connection is failed", e);
         }
 
-        if(freeConnections.size() == 0) {
+        if (freeConnections.size() == 0) {
             logger.fatal("connection poll don't created, pool size is 0");
             throw new RuntimeException("connection poll don't created, pool size is 0");
         }
