@@ -38,15 +38,18 @@ public class QuizParser {
     }
 
     private static String[] getArrayFromString(String input) {
-        input = input.substring(1, input.length() - 1).replaceAll("\\\\\"", "");
+        input = input.substring(1, input.length() - 1)
+                .replaceAll("\\\\\\\\\\\\\"", "\"")
+                .replaceAll("\\\\\"", "");
         input = input.replaceAll("],\"", "];;;;\"");
         return input.split(";;;;");
     }
 
     private static List<String> createAnswers(String answersString) {
+        System.out.println("AA:" + answersString);
         List<String> answers = new ArrayList<>();
         if (!answersString.isEmpty()) {
-            answers = Arrays.stream(answersString.split(COMMA_STRING + "\"")).collect(Collectors.toList());
+            answers = Arrays.stream(answersString.split(COMMA_STRING)).collect(Collectors.toList());
             for (int i = 0; i < answers.size(); i++) {
                 String current = answers.get(i);
                 answers.set(i, current.substring(1, current.length() - 1));

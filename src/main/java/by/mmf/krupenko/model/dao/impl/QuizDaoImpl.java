@@ -50,12 +50,10 @@ public class QuizDaoImpl implements QuizDao {
             statement.setString(5, CommonConsts.QUIZ_PREFIX + id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new DaoException("ErrorCode:" + e.getErrorCode() +
-                    ":\nSQLState:" + e.getSQLState() + "\n", e);
+            throw new DaoException("SQL Exception in QuizDaoImpl! ErrorCode:" + e.getErrorCode() +
+                                                                ";\nSQLState:" + e.getSQLState(), e);
         } catch (ConnectionPoolException e) {
-            e.printStackTrace();
-            throw new DaoException("Connection Pool Exc", e);
+            throw new DaoException("ConnectionPoolException in QuizDaoImpl", e);
         }
     }
 
