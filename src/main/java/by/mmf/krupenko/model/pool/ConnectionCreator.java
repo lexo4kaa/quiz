@@ -21,8 +21,12 @@ class ConnectionCreator {
     private static final String FILE_NAME = "properties/database.properties";
     private static final String PROPERTY_URL = "url";
     private static final String PROPERTY_DRIVER = "driver";
+    private static final String PROPERTY_USER = "user";
+    private static final String PROPERTY_PASSWORD = "password";
     private static final String DATABASE_URL;
     private static final String DATABASE_DRIVER;
+    private static final String DATABASE_USER;
+    private static final String DATABASE_PASSWORD;
 
     private ConnectionCreator(){}
 
@@ -32,9 +36,9 @@ class ConnectionCreator {
             InputStream inputStream = classLoader.getResourceAsStream(FILE_NAME);
             properties.load(inputStream);
             DATABASE_URL = properties.getProperty(PROPERTY_URL);
-            properties.remove(PROPERTY_URL);
             DATABASE_DRIVER = properties.getProperty(PROPERTY_DRIVER);
-            properties.remove(PROPERTY_DRIVER);
+            DATABASE_USER = properties.getProperty(PROPERTY_USER);
+            DATABASE_PASSWORD = properties.getProperty(PROPERTY_PASSWORD);
             Class.forName(DATABASE_DRIVER);
         } catch (FileNotFoundException e) {
             logger.fatal("FileNotFoundException in ConnectionCreator", e);
@@ -55,6 +59,6 @@ class ConnectionCreator {
      * @throws SQLException sql exception
      */
     static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DATABASE_URL, properties);
+        return DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
     }
 }
