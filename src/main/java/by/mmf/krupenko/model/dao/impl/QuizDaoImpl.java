@@ -49,8 +49,12 @@ public class QuizDaoImpl implements QuizDao {
             statement.setDate(4, Date.valueOf(LocalDate.now()));
             statement.setString(5, CommonConsts.QUIZ_PREFIX + id);
             statement.executeUpdate();
-        } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while creating quiz", e);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DaoException("SQL Exc", e);
+        } catch (ConnectionPoolException e) {
+            e.printStackTrace();
+            throw new DaoException("Connection Pool Exc", e);
         }
     }
 
