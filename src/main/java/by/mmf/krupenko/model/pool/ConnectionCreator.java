@@ -59,6 +59,6 @@ class ConnectionCreator {
      * @throws SQLException sql exception
      */
     static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
+        return DriverManager.getConnection(DATABASE_URL);
     }
 }
