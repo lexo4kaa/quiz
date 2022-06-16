@@ -22,10 +22,6 @@ public class TeacherDaoImpl implements TeacherDao {
     private static final String SQL_FIND_TEACHER_BY_EMAIL = "SELECT Email, FirstName, LastName, Password " +
                                                             "FROM Teachers WHERE Email = ?";
 
-
-    private static final String SQL_CREATE_TEACHER = "INSERT INTO Teachers (Email, FirstName, LastName, Password) " +
-            "VALUES (?,?,?,?)";
-
     private TeacherDaoImpl() {
     }
 

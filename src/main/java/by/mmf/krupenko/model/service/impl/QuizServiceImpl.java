@@ -65,7 +65,6 @@ public class QuizServiceImpl implements QuizService {
                 questionDao.createQuestion(question, quizId);
                 int questionId = questionDao.findQuestionId(question.getTitle(), quizId);
                 for (String answer : entry.getValue()) {
-                    System.out.println("a:"+answer);
                     answerDao.createAnswer(answer, questionId);
                 }
             }

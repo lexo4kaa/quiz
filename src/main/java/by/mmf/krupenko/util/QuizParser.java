@@ -46,7 +46,6 @@ public class QuizParser {
     }
 
     private static List<String> createAnswers(String answersString) {
-        System.out.println("AA:" + answersString);
         List<String> answers = new ArrayList<>();
         if (!answersString.isEmpty()) {
             answers = Arrays.stream(answersString.split(COMMA_STRING)).collect(Collectors.toList());
