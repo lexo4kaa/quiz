@@ -51,7 +51,8 @@ public class QuizDaoImpl implements QuizDao {
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DaoException("SQL Exc", e);
+            throw new DaoException("ErrorCode:" + e.getErrorCode() +
+                    ":\nSQLState:" + e.getSQLState() + "\n", e);
         } catch (ConnectionPoolException e) {
             e.printStackTrace();
             throw new DaoException("Connection Pool Exc", e);
