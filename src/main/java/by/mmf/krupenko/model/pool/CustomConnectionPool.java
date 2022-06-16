@@ -75,7 +75,7 @@ public class CustomConnectionPool {
         try {
             connection = freeConnections.take();
             givenAwayConnections.offer(connection);
-            logger.info("getConnection\nleft " + freeConnections.size() + " connections");
+            logger.info("get connection: left " + freeConnections.size() + " connections");
         } catch (InterruptedException e) {
             logger.error("error getting connection", e);
             throw new ConnectionPoolException("error getting connection", e);
