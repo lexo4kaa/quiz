@@ -18,7 +18,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class CustomConnectionPool {
     private static final Logger logger = LogManager.getLogger();
-    private static final int DEFAULT_POOL_SIZE = 8;
+    private static final int DEFAULT_POOL_SIZE = 10;
     private static CustomConnectionPool instance;
     private static Lock lock = new ReentrantLock();
 
@@ -75,6 +75,7 @@ public class CustomConnectionPool {
         try {
             connection = freeConnections.take();
             givenAwayConnections.offer(connection);
+            logger.info("getConnection\nleft " + freeConnections.size() + " connections");
         } catch (InterruptedException e) {
             logger.error("error getting connection", e);
             throw new ConnectionPoolException("error getting connection", e);
