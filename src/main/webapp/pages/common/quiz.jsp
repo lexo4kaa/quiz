@@ -52,6 +52,16 @@
                 background-color: white; color: black; cursor: pointer;"
            type="submit" value="Send"/>
 </form>
+<c:if test="${ currentTeacherEmail != null }">
+    <form name="to_quizzes_page" method="GET" action="${pageContext.request.contextPath}/controller">
+        <input type="hidden" name="command" value="to_quizzes_page"/>
+        <input style="font-size: 16px; width: 150px; padding: 5px; margin: -10px auto;
+                border: 1px solid black; border-radius: 5px;
+                background-color: white; color: black; cursor: pointer;"
+               type="submit" value="Back"/>
+    </form>
+
+</c:if>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/getAnswers.js"></script>
 
 </body>

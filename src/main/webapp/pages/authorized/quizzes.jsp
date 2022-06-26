@@ -17,7 +17,7 @@
     <table style="margin: 0 auto">
         <tr style="font-size: large">
             <th style="width: 235px">Name</th>
-            <th style="width: 165px">Creation data</th>
+            <th style="width: 165px">Creation date</th>
             <th>Actions</th>
         </tr>
         <c:forEach var="quiz" items="${ quizzes }" varStatus="status">
@@ -31,7 +31,7 @@
                         <input class="button" type="submit" value="Pass the quiz"/>
                     </form>
 
-                    <form style="float:right; margin: 5px" name="remove_quiz_page" method="GET" action="${pageContext.request.contextPath}/controller">
+                    <form style="float:right; margin: 5px" name="remove_quiz_page" method="GET" onsubmit="return confirmDeletion()" action="${pageContext.request.contextPath}/controller">
                         <input type="hidden" name="command" value="remove_quiz"/>
                         <input type="hidden" name="quizId" value="${ quiz.id }">
                         <input class="button" type="submit" value="Remove the quiz"/>
@@ -60,7 +60,6 @@
     <input type="hidden" name="command" value="to_create_quiz_page"/>
     <input class="button" type="submit" value="Create new quiz"/>
 </form>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/confirmDeletion.js"></script>
 </body>
-
 </html>
