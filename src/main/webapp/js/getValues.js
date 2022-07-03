@@ -5,6 +5,7 @@ function getValues() {
         let questionObj = {};
         let question = questions[i];
         questionObj['type'] = question.querySelector("select").value;
+        questionObj['isRequired'] = question.querySelector("[id='isRequired']").checked;
         questionObj['title'] = question.querySelector("[id='title']").value;
 
         let answersArray = [];

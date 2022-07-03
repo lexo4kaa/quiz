@@ -3,6 +3,7 @@ package by.mmf.krupenko.model.service;
 import by.mmf.krupenko.entity.Answer;
 import by.mmf.krupenko.entity.Question;
 import by.mmf.krupenko.entity.Quiz;
+import by.mmf.krupenko.model.view.ResultsView;
 
 import java.util.List;
 import java.util.Map;
@@ -23,8 +24,8 @@ public interface StatisticsService {
      * Show results answers.
      *
      * @param quizId id of quiz
-     * @return map where key is a question, values are map where key is answer and value is the number of such responses
+     * @return result view
      * @throws ServiceException if DaoException occur
      */
-    Map<Question, Map<String, Integer>> show(String quizId) throws ServiceException;
+    ResultsView show(String quizId) throws ServiceException;
 }

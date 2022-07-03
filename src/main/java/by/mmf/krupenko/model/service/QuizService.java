@@ -3,6 +3,7 @@ package by.mmf.krupenko.model.service;
 import by.mmf.krupenko.entity.Answer;
 import by.mmf.krupenko.entity.Question;
 import by.mmf.krupenko.entity.Quiz;
+import by.mmf.krupenko.model.view.QuizView;
 
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ public interface QuizService {
      * @return list of quizzes
      * @throws ServiceException if DaoException occur
      */
-    List<Quiz> findQuizzesByTeacherEmail(String teacherEmail) throws ServiceException;
+    List<QuizView> findQuizzesByTeacherEmail(String teacherEmail) throws ServiceException;
 
     /**
      * Create a quiz.

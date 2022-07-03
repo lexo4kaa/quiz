@@ -12,8 +12,9 @@ public class Question {
     public Question() {
     }
 
-    public Question(String title, QuestionType questionType) {
+    public Question(String title, boolean isRequired, QuestionType questionType) {
         this.title = title;
+        this.isRequired = isRequired;
         this.questionType = questionType;
     }
 
@@ -41,11 +42,11 @@ public class Question {
         this.title = title;
     }
 
-    public boolean isRequired() {
+    public boolean getIsRequired() {
         return isRequired;
     }
 
-    public void setRequired(boolean required) {
+    public void setIsRequired(boolean required) {
         isRequired = required;
     }
 

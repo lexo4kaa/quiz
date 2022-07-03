@@ -20,7 +20,12 @@
 
             <div id="question_${ question.id }" style="border: black; color: black; border-radius: 10px; background: rgb(200,200,250,0.97);
                                                         margin-bottom: 10px; padding: 10px 20px">
-                <div style="font-weight: bold; font-size: 130%; padding: 5px 0;"><c:out value="${ question.title }" /></div>
+                <div style="font-weight: bold; font-size: 130%; padding: 5px 0;">
+                    <c:out value="${ question.title }" />
+                    <c:if test="${ question.isRequired == 'true' }">
+                        <span style="color:red">*</span>
+                    </c:if>
+                </div>
 
                 <c:if test="${ question.questionType.value == 'text' }">
                     <textarea autocomplete="off" name="quizName" placeholder="A short answer"
@@ -60,7 +65,6 @@
                 background-color: white; color: black; cursor: pointer;"
                type="submit" value="Back"/>
     </form>
-
 </c:if>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/getAnswers.js"></script>
 

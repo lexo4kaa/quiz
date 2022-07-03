@@ -5,6 +5,7 @@
 <html>
 <head>
     <title>Create quiz</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/createQuiz.css"/>
 </head>
 <body style="margin: 0 auto; width: 40%; text-align: left; background-color: rgb(200,200,250,0.25)">
 <form name="createQuiz" method="POST" action="${pageContext.request.contextPath}/controller"

@@ -17,7 +17,6 @@ function addQuestionFunc (input) {
     answersDiv.id = "answers";
 
     let textField = document.createElement("div");
-    textField.innerText = "A short answer";
     textField.style.paddingTop = "5px";
 
     answersDiv.append(textField);
@@ -30,6 +29,13 @@ function addQuestionFunc (input) {
     select.onchange = function () {
         switchQuestionType(select);
     };
+
+    let topDiv = document.createElement("div");
+    topDiv.style.display = "flex";
+    topDiv.style.alignItems = "center";
+    topDiv.style.justifyContent = "space-between";
+    topDiv.append(select);
+    topDiv.append(getSwitchLabel());
 
     let removeQuestion = document.createElement("input");
     removeQuestion.type = "button";
@@ -50,7 +56,7 @@ function addQuestionFunc (input) {
     div.style.padding = "10px";
     div.style.margin = "5px";
 
-    div.append(select);
+    div.append(topDiv);
     div.append(question);
     div.append(removeQuestion);
     div.append(addQuestion);
@@ -64,6 +70,35 @@ function getBr() {
     return document.createElement("br");
 }
 
+function getSwitchLabel() {
+    let div = document.createElement("div");
+    div.style.display = "flex";
+    div.style.alignItems = "center";
+
+    let p = document.createElement("p");
+    p.innerText = "Required?";
+    p.style.marginRight = "3px";
+
+    let switchLabel = document.createElement("label");
+    switchLabel.className = "switch";
+
+    let input = document.createElement("input");
+    input.id = "isRequired";
+    input.type = "checkbox";
+    input.checked = true;
+
+    let span = document.createElement("span");
+    span.className = "slider round";
+
+    switchLabel.append(input);
+    switchLabel.append(span);
+
+    div.append(p);
+    div.append(switchLabel);
+
+    return div;
+}
+
 function addOption(select, value, text) {
     let option = document.createElement("option");
     option.value = value;
@@ -75,8 +110,6 @@ function switchQuestionType(select) {
     let input;
     if (select.value === "text") {
         input = document.createElement("div");
-        input.innerText = "A short answer";
-        input.style.paddingTop = "5px";
     } else {
         input = document.createElement("input");
         input.id = "answer";
@@ -95,7 +128,7 @@ function switchQuestionType(select) {
         }
     }
 
-    let answers = select.parentNode.querySelector("#answers");
+    let answers = select.parentNode.parentNode.querySelector("#answers");
     answers.innerHTML = "";
     answers.append(input);
 }

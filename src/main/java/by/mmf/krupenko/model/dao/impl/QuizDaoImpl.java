@@ -20,15 +20,16 @@ import static by.mmf.krupenko.model.dao.column.QuizColumn.*;
 
 public class QuizDaoImpl implements QuizDao {
     private static final QuizDao instance = new QuizDaoImpl();
-    private static final String SQL_FIND_QUIZZES_BY_TEACHER_EMAIL = "SELECT Id,Name,TeacherEmail,CreationDate,Link " +
+    private static final String SQL_FIND_QUIZZES_BY_TEACHER_EMAIL = "SELECT Id,Name,TeacherEmail,CreationDate,Link,CountOfAnswers " +
                                                                     "FROM Quizzes WHERE TeacherEmail = ?";
-    private static final String SQL_FIND_QUIZ_BY_NAME_AND_TEACHER_EMAIL =  "SELECT Id,Name,TeacherEmail,CreationDate,Link " +
+    private static final String SQL_FIND_QUIZ_BY_NAME_AND_TEACHER_EMAIL =  "SELECT Id,Name,TeacherEmail,CreationDate,Link,CountOfAnswers " +
                                                     "FROM Quizzes WHERE Name = ? AND TeacherEmail = ?";
-    private static final String SQL_FIND_QUIZ_BY_ID =  "SELECT Id,Name,TeacherEmail,CreationDate,Link " +
+    private static final String SQL_FIND_QUIZ_BY_ID =  "SELECT Id,Name,TeacherEmail,CreationDate,Link,CountOfAnswers " +
                                                     "FROM Quizzes WHERE Id = ?";
-    private static final String SQL_CREATE_QUIZ = "INSERT INTO Quizzes (Id,Name,TeacherEmail,CreationDate,Link) " +
-                                                  "VALUES (?,?,?,?,?)";
+    private static final String SQL_CREATE_QUIZ = "INSERT INTO Quizzes (Id,Name,TeacherEmail,CreationDate,Link,CountOfAnswers) " +
+                                                  "VALUES (?,?,?,?,?,?)";
     private static final String SQL_REMOVE_QUIZ = "DELETE FROM Quizzes WHERE Id = ?";
+    private static final String SQL_INCREMENT_COUNT_OF_ANSWERS = "UPDATE Quizzes SET CountOfAnswers = ? WHERE Id = ?";
 
     private QuizDaoImpl() {
     }
@@ -48,6 +49,7 @@ public class QuizDaoImpl implements QuizDao {
             statement.setString(3, teacherEmail);
             statement.setDate(4, Date.valueOf(LocalDate.now()));
             statement.setString(5, CommonConsts.QUIZ_PREFIX + id);
+            statement.setInt(6, 0);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException("SQL Exception in QuizDaoImpl! ErrorCode:" + e.getErrorCode() +
@@ -117,6 +119,18 @@ public class QuizDaoImpl implements QuizDao {
         return quiz;
     }
 
+    @Override
+    public void changeCountOfAnswers(String quizId, int value) throws DaoException {
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_INCREMENT_COUNT_OF_ANSWERS)) {
+            statement.setInt(1, value);
+            statement.setString(2, quizId);
+            statement.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while incrementing count of answers", e);
+        }
+    }
+
     private Quiz createQuizFromResultSet(ResultSet resultSet) throws SQLException {
         Quiz quiz = new Quiz();
         String id = resultSet.getString(ID);
@@ -124,11 +138,13 @@ public class QuizDaoImpl implements QuizDao {
         String teacherEmail = resultSet.getString(TEACHER_EMAIL);
         LocalDate creationDate = resultSet.getDate(CREATION_DATE).toLocalDate();
         String link = resultSet.getString(LINK);
+        int countOfAnswers = resultSet.getInt(COUNT_OF_ANSWERS);
         quiz.setId(id);
         quiz.setName(name);
         quiz.setTeacherEmail(teacherEmail);
         quiz.setCreationDate(creationDate);
         quiz.setLink(link);
+        quiz.setCountOfAnswers(countOfAnswers);
         return quiz;
     }
 }

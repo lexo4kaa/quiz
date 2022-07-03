@@ -12,13 +12,14 @@
 <body style="background-color: rgb(200,200,250,0.25)">
 <div style="width: 50%; margin: 0 auto">
 
-    <c:if test="${ currentQuizResults.size() == 0 }">
+    <c:if test="${ currentQuizResults.results.size() == 0 }">
         <h3>There are no answers on this quiz</h3>
     </c:if>
 
-    <c:if test="${ currentQuizResults.size() != 0 }">
+    <c:if test="${ currentQuizResults.results.size() != 0 }">
+        <h3 style="text-align: center">Results of '${ currentQuizResults.quizTitle }' </h3>
         <c:set var="counter" value="0"/>
-        <c:forEach var="results" items="${ currentQuizResults }" varStatus="status">
+        <c:forEach var="results" items="${ currentQuizResults.results }" varStatus="status">
             <div id="wrapper" style="text-align: center; background: white; color: #808080;
                                     font-family: 'Verdana, Helvetica, Arial, sans-serif'">
                 <c:set var="question" value="${ results.key }"/>
@@ -66,44 +67,31 @@
                 elem.remove();
             });
 
-            if (type !== "text") {
-                container.style.width = "100%";
-                container.style.height = "50%";
-                container.style.margin = "0 auto";
+            container.style.width = "100%";
+            container.style.height = "50%";
+            container.style.margin = "0 auto";
 
-                let titleDiv = container.parentElement.querySelector("#title");
-                let title = titleDiv.innerText;
-                titleDiv.remove();
+            let titleDiv = container.parentElement.querySelector("#title");
+            let title = titleDiv.innerText;
+            titleDiv.remove();
 
-                let chart;
-                if (type === "one") {
-                    chart = anychart.pie();
-                    chart.data(data);
-                } else if (type === "multiple") {
-                    chart = anychart.bar();
-                    var series = chart.bar(data);
-                    chart.xAxis().title('Answers');
-                    chart.yAxis().title('Quantity');
-                    chart.yScale().minimum(0);
-                    chart.yScale().ticks().allowFractional(false);
-                    chart.tooltip().titleFormat("Answer: {%x}");
-                    chart.tooltip().format("Quantity: {%value}");
-                }
-                chart.title(title);
-                chart.container(container.id);
-                chart.draw();
-            } else { // if text
-                data.forEach(answer => {
-                    let p = document.createElement("p");
-                    p.style.width = "fit-content";
-                    p.style.margin = "10px auto";
-                    p.innerText = answer.x;
-                    p.style.fontFamily = "Verdana, Helvetica, Arial, sans-serif";
-                    p.style.color = "black";
-                    p.style.background = "lightBlue"
-                    container.append(p);
-                });
+            let chart;
+            if (type === "one") {
+                chart = anychart.pie();
+                chart.data(data);
+            } else {
+                chart = anychart.bar();
+                var series = chart.bar(data);
+                chart.xAxis().title('Answers');
+                chart.yAxis().title('Quantity');
+                chart.yScale().minimum(0);
+                chart.yScale().ticks().allowFractional(false);
+                chart.tooltip().titleFormat("Answer: {%x}");
+                chart.tooltip().format("Quantity: {%value}");
             }
+            chart.title(title);
+            chart.container(container.id);
+            chart.draw();
         });
     });
 </script>

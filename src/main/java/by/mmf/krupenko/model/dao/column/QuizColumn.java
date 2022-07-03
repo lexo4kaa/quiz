@@ -9,6 +9,7 @@ public final class QuizColumn {
     public static final String TEACHER_EMAIL = "TeacherEmail";
     public static final String CREATION_DATE = "CreationDate";
     public static final String LINK = "Link";
+    public static final String COUNT_OF_ANSWERS = "CountOfAnswers";
 
     private QuizColumn() {
     }

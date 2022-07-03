@@ -22,13 +22,14 @@ public class QuizParser {
     public static Map<Question, List<String>> parseCreatedQuiz(String input) {
         String[] questions = getArrayFromString(input);
         Map<Question, List<String>> map = new HashMap<>();
-        Pattern pattern = Pattern.compile("\"\\{type:([\\w]+),title:([\\w\\p{Punct} А-ЯЁа-яё]*)}\":\\[([\\w\\p{Punct} А-ЯЁа-яё]*)]");
+        Pattern pattern = Pattern.compile("\"\\{type:([\\w]+),isRequired:([\\w]*),title:([\\w\\p{Punct} А-ЯЁа-яё]*)}\":\\[([\\w\\p{Punct} А-ЯЁа-яё]*)]");
         for (String questionString : questions) {
             try {
                 Matcher matcher = pattern.matcher(questionString);
                 matcher.matches();
-                Question question = new Question(matcher.group(2), QuestionType.getQuestionType(matcher.group(1)).get());
-                List<String> valuesList = createAnswers(matcher.group(3));
+                Question question = new Question(matcher.group(3), Boolean.parseBoolean(matcher.group(2)),
+                                        QuestionType.getQuestionType(matcher.group(1)).get());
+                List<String> valuesList = createAnswers(matcher.group(4));
                 map.put(question, valuesList);
             } catch (Exception e) {
                 logger.error("Exception with patterns", e);

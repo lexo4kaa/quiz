@@ -6,6 +6,7 @@ import by.mmf.krupenko.entity.Quiz;
 import by.mmf.krupenko.model.service.QuizService;
 import by.mmf.krupenko.model.service.ServiceException;
 import by.mmf.krupenko.model.service.impl.QuizServiceImpl;
+import by.mmf.krupenko.model.view.QuizView;
 import by.mmf.krupenko.resource.ConfigurationManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,11 +29,9 @@ public class FindQuizzesByTeacherEmailCommand implements ActionCommand {
     public Router execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
-        List<Quiz> quizzes;
         String teacherEmail = request.getParameter(TEACHER_EMAIL);
         try {
-            quizzes = quizService.findQuizzesByTeacherEmail(teacherEmail);
-            session.setAttribute(QUIZZES, quizzes);
+            session.setAttribute(QUIZZES, quizService.findQuizzesByTeacherEmail(teacherEmail));
             page = ConfigurationManager.getProperty("path.page.quizzes");
         } catch (ServiceException e) {
             logger.error("Exception in 'FindQuizzesByTeacherEmailCommand', redirected to error page");

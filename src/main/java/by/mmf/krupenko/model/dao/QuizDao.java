@@ -53,4 +53,12 @@ public interface QuizDao {
      * @throws DaoException if SQLException or ConnectionPoolException occur
      */
     Quiz findQuizByQuizId(String quizId) throws DaoException;
+
+    /**
+     * Change count of answers.
+     *
+     * @param quizId quiz id
+     * @throws DaoException if SQLException or ConnectionPoolException occur
+     */
+    void changeCountOfAnswers(String quizId, int value) throws DaoException;
 }

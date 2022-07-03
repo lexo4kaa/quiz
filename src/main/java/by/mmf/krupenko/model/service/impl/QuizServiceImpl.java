@@ -12,9 +12,11 @@ import by.mmf.krupenko.model.dao.impl.QuestionDaoImpl;
 import by.mmf.krupenko.model.dao.impl.QuizDaoImpl;
 import by.mmf.krupenko.model.service.QuizService;
 import by.mmf.krupenko.model.service.ServiceException;
+import by.mmf.krupenko.model.view.QuizView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,15 +46,21 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public List<Quiz> findQuizzesByTeacherEmail(String teacherEmail) throws ServiceException {
-        List<Quiz> quizzes;
+    public List<QuizView> findQuizzesByTeacherEmail(String teacherEmail) throws ServiceException {
+        List<QuizView> quizViews = new ArrayList<>();
         try {
-            quizzes = quizDao.findQuizzesByTeacherEmail(teacherEmail);
+            List<Quiz> quizzes = quizDao.findQuizzesByTeacherEmail(teacherEmail);
+            for (Quiz quiz : quizzes) {
+                QuizView quizView = new QuizView();
+                quizView.setQuiz(quiz);
+                quizView.setCountOfQuestions(questionDao.findQuestionsByQuizId(quiz.getId()).size());
+                quizViews.add(quizView);
+            }
         } catch (DaoException e) {
             logger.error("quizDao.findQuizzesByTeacherEmail(" + teacherEmail + ") is failed in QuizServiceImpl", e);
             throw new ServiceException(e);
         }
-        return quizzes;
+        return quizViews;
     }
 
     @Override

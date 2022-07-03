@@ -1,6 +1,7 @@
 package by.mmf.krupenko.model.dao;
 
 import by.mmf.krupenko.entity.Question;
+import by.mmf.krupenko.entity.Quiz;
 
 import java.util.List;
 
@@ -35,4 +36,13 @@ public interface QuestionDao {
      * @throws DaoException if SQLException or ConnectionPoolException occur
      */
     List<Question> findQuestionsByQuizId(String quizId) throws DaoException;
+
+    /**
+     * Find a question.
+     *
+     * @param questionId question id
+     * @return question
+     * @throws DaoException if SQLException or ConnectionPoolException occur
+     */
+    Question findQuestionByQuestionId(int questionId) throws DaoException;
 }

@@ -2,6 +2,7 @@ package by.mmf.krupenko.model.dao.impl;
 
 import by.mmf.krupenko.entity.Question;
 import by.mmf.krupenko.entity.QuestionType;
+import by.mmf.krupenko.entity.Quiz;
 import by.mmf.krupenko.model.dao.DaoException;
 import by.mmf.krupenko.model.dao.QuestionDao;
 import by.mmf.krupenko.model.pool.ConnectionPoolException;
@@ -18,11 +19,14 @@ import static by.mmf.krupenko.model.dao.column.QuestionColumn.*;
 
 public class QuestionDaoImpl implements QuestionDao {
     private static final QuestionDao instance = new QuestionDaoImpl();
+    private static final String SQL_FIND_QUESTION_BY_ID =  "SELECT Id,QuizId,Title,IsRequired,QuestionType " +
+                                                            "FROM Questions WHERE Id = ?";
     private static final String SQL_FIND_QUESTIONS_BY_QUIZ_ID = "SELECT Id,QuizId,Title,IsRequired,QuestionType " +
                                                                 "FROM Questions WHERE QuizId = ?";
     private static final String SQL_FIND_QUESTIONS_BY_QUIZ_ID_AND_TITLE = "SELECT Id,QuizId,Title,IsRequired,QuestionType " +
                                                                           "FROM Questions WHERE QuizId = ? AND Title = ?";
-    private static final String SQL_CREATE_QUESTION = "INSERT INTO Questions (QuizId, Title, QuestionType) VALUES (?,?,?)";
+    private static final String SQL_CREATE_QUESTION =   "INSERT INTO Questions (QuizId,Title,IsRequired,QuestionType) " +
+                                                        "VALUES (?,?,?,?)";
 
     private QuestionDaoImpl() {
     }
@@ -37,7 +41,8 @@ public class QuestionDaoImpl implements QuestionDao {
              PreparedStatement statement = connection.prepareStatement(SQL_CREATE_QUESTION)) {
             statement.setString(1, quizId);
             statement.setString(2, question.getTitle());
-            statement.setString(3, question.getQuestionType().getValue());
+            statement.setBoolean(3, question.getIsRequired());
+            statement.setString(4, question.getQuestionType().getValue());
             statement.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Error while create question", e);
@@ -77,6 +82,22 @@ public class QuestionDaoImpl implements QuestionDao {
         return questions;
     }
 
+    @Override
+    public Question findQuestionByQuestionId(int questionId) throws DaoException {
+        Question question = new Question();
+        try (Connection connection = CustomConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_FIND_QUESTION_BY_ID)) {
+            statement.setInt(1, questionId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                question = createQuestionFromResultSet(resultSet);
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while finding question", e);
+        }
+        return question;
+    }
+
     private Question createQuestionFromResultSet(ResultSet resultSet) throws SQLException {
         Question question = new Question();
         int id = resultSet.getInt(ID);
@@ -87,7 +108,7 @@ public class QuestionDaoImpl implements QuestionDao {
         question.setId(id);
         question.setQuizId(quizId);
         question.setTitle(title);
-        question.setRequired(isRequired);
+        question.setIsRequired(isRequired);
         question.setQuestionType(questionType);
         return question;
     }
